@@ -1,6 +1,10 @@
 library(gh)
-query <- gh("GET /repos/{username}/brandmaier/commits",
-               username = "brandmaier", per_page=100)
+
+repository <- Sys.getenv("repository")
+username <- Sys.getenv("username")
+
+query <- gh("GET /repos/{username}/{repository}/commits",
+               username = username, repository=repository per_page=100)
 
 dates <- sapply(query, function(x) {
 
