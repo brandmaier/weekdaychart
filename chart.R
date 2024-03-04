@@ -1,7 +1,7 @@
 library(gh)
 
-repository <- Sys.getenv("repository")
-username <- Sys.getenv("username")
+repository <- Sys.getenv("REPOSITORY")
+username <- Sys.getenv("USERNAME")
 
 query <- gh("GET /repos/{username}/{repository}/commits",
                username = username, repository=repository per_page=100)
