@@ -39,7 +39,7 @@ jobs:
           USERNAME: ${{ github.repository_owner }}
           REPOSITORY: ${{ github.event.repository.name }}
        run: |
-          Rscript graph.R
+          Rscript chart.R
 
      - name: Commit & Push
        run: |
