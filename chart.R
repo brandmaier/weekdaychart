@@ -1,4 +1,8 @@
 library(gh)
+library(viridis)
+library(dplyr)
+library(ggplot2)
+
 
 repository <- Sys.getenv("REPOSITORY")
 username <- Sys.getenv("USERNAME")
@@ -18,8 +22,6 @@ dates <- sapply(query, function(x) {
   
 })
 
-library(dplyr)
-library(ggplot2)
 
 all_weekdays <- weekdays(as.POSIXct(paste0("1972-10-0",2:8," GMT")))
 
@@ -27,9 +29,11 @@ dates <- ordered(dates, levels=all_weekdays)
 
 #data.frame(weekday=names(table(dates)),frequency=table(dates))
 plt <- tibble(dates)%>% 
-  ggplot(aes(x=dates,fill=dates))+
-geom_bar(stat="count")+
-theme(axis.text.x = element_text(angle=45, hjust=1))+
-guides(fill = "none")+xlab("")
+ ggplot(aes(x=dates,fill=dates))+
+ geom_bar(stat="count")+
+ theme(axis.text.x = element_text(angle=45, hjust=1))+
+ guides(fill = "none")+
+ xlab("")+
+ scale_fill_viridis(option="magma", discrete = TRUE)
 
 ggsave("weekdays.png", plot = plt, width = 6, height = 3)
