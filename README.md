@@ -2,6 +2,8 @@
 
 This is a github action that creates a chart of recent project commits by day of week. Here is an example showing the most recent project commit counts per day of week:
 
+![weekday.png]
+
 The action can be automatically run on a regular schedule. Every time, it will update the chart with most recent information and commit and push the chart to your repository. So, you can use the chart in your project profile README file or integrate it in other contexts.
 
 # How does it work
