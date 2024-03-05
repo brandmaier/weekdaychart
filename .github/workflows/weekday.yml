@@ -26,7 +26,7 @@ jobs:
 
 
      - name: Dependencies
-       run: Rscript -e "install.packages(c('curl','gh','dplyr','ggplot2'))"
+       run: Rscript -e "install.packages(c('curl','gh','dplyr','ggplot2','viridis'))"
      - name: Checkout repository
        uses: actions/checkout@v2
        with:
