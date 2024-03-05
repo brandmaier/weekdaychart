@@ -1,3 +1,5 @@
+[![Weekday](https://github.com/brandmaier/weekdaychart/actions/workflows/weekday.yml/badge.svg)](https://github.com/brandmaier/weekdaychart/actions/workflows/weekday.yml)
+
 # Commits per Day of Week
 
 This is a github action that creates a chart of recent project commits by day of week. Here is an example showing the most recent project commit counts per day of week:
