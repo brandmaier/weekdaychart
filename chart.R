@@ -36,7 +36,7 @@ plt <- tibble(dates)%>%
  geom_bar(stat="count")+
  theme(axis.text.x = element_text(angle=45, hjust=1))+
  guides(fill = "none")+
- xlab("")+
+ xlab("")+ ylab("Commits")+
  scale_fill_viridis(option=colorscheme, discrete = TRUE)
 
 ggsave("weekdays.png", plot = plt, width = 6, height = 3)
