@@ -6,6 +6,9 @@ library(ggplot2)
 
 repository <- Sys.getenv("REPOSITORY")
 username <- Sys.getenv("USERNAME")
+colorscheme <- Sys.getenv("COLORSCHEME")
+
+if (colorscheme=="") colorscheme = "viridis"
 
 query <- gh("GET /repos/{username}/{repository}/commits",
                username = username, repository=repository,
@@ -34,6 +37,6 @@ plt <- tibble(dates)%>%
  theme(axis.text.x = element_text(angle=45, hjust=1))+
  guides(fill = "none")+
  xlab("")+
- scale_fill_viridis(option="magma", discrete = TRUE)
+ scale_fill_viridis(option=colorscheme, discrete = TRUE)
 
 ggsave("weekdays.png", plot = plt, width = 6, height = 3)
