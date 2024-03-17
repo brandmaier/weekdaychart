@@ -14,14 +14,16 @@ on:
     inputs:
       github_pat:
         description: 'GITHUB PAT'
-#        required: true
-        default:  '${{ secrets.GITHUB_TOKEN }}'
+        required: true
+#        default:  '${{ secrets.GITHUB_TOKEN }}'
       username:
-        description: "Github username'
-        default: '${{ github.repository_owner }}'
+        description: 'Github username'
+        required: true
+ #       default: '${{ github.repository_owner }}'
       repository:
-        description: "Repository"
-        default: '${{ github.event.repository.name }}'
+        description: 'Repository'
+        required: true
+#        default: '${{ github.event.repository.name }}'
       
 permissions: write-all  
 
