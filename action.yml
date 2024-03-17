@@ -1,17 +1,35 @@
+#
+# github action for preparing an R environment with
+# a couple of packages (including ggplot2)
+# and running the R script to generate the
+# day of week chart
+#
+
 name: Weekday
 
 on:
 #  schedule: # 03:00 JST == 18:00 UTC
 #    - cron: "0 18 * * *"
   workflow_dispatch:
-  
+    inputs:
+      github_pat:
+        description: 'GITHUB PAT'
+#        required: true
+        default:  '${{ secrets.GITHUB_TOKEN }}'
+      username:
+        description: "Github username'
+        default: '${{ github.repository_owner }}'
+      repository:
+        description: "Repository"
+        default: '${{ github.event.repository.name }}'
+      
 permissions: write-all  
 
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_PAT: '${{ github.event.inputs.github_pat }}'
       R_KEEP_PKG_SOURCE: yes
     name: generate chart
     steps:
@@ -24,9 +42,9 @@ jobs:
         r-version: 4.x
         use-public-rspm: true
 
-
-     - name: Dependencies
+     - name: Install dependencies
        run: Rscript -e "install.packages(c('curl','gh','dplyr','ggplot2','viridis'))"
+       
      - name: Checkout repository
        uses: actions/checkout@v2
        with:
@@ -35,16 +53,8 @@ jobs:
         
      - name: Generate graph
        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          USERNAME: ${{ github.repository_owner }}
-          REPOSITORY: ${{ github.event.repository.name }}
+          GITHUB_TOKEN: ${{ github.event.inputs.github_pat }}
+          USERNAME: ${{ github.event.inputs.username }}
+          REPOSITORY: ${{ github.event.inputs.repository }}
        run: |
           Rscript chart.R
-
-     - name: Commit & Push
-       run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add .
-          git commit -am "updated weekday chart"
-          git push
