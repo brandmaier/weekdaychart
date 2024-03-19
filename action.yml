@@ -15,7 +15,7 @@ on:
       github_pat:
         description: 'GITHUB PAT'
         required: true
-#        default:  '${{ secrets.GITHUB_TOKEN }}'
+        default: ${{ github.token }}
       username:
         description: 'Github username'
         required: true
@@ -31,7 +31,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      GITHUB_PAT: '${{ github.event.inputs.github_pat }}'
+      GITHUB_PAT: ${{ github.event.inputs.github_pat }}
       R_KEEP_PKG_SOURCE: yes
     name: generate chart
     steps:
@@ -48,7 +48,7 @@ jobs:
        run: Rscript -e "install.packages(c('curl','gh','dplyr','ggplot2','viridis'))"
        
      - name: Checkout repository
-       uses: actions/checkout@v2
+       uses: actions/checkout@v4
        with:
           repository: brandmaier/weekdaychart
           ref: main  # specify the branch 
