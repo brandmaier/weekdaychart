@@ -10,7 +10,8 @@ name: Weekday
 on:
 #  schedule: # 03:00 JST == 18:00 UTC
 #    - cron: "0 18 * * *"
-  workflow_dispatch:
+#  workflow_dispatch:
+  workflow_call:
     inputs:
       github_pat:
         description: 'GITHUB PAT'
