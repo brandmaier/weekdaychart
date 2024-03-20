@@ -15,7 +15,7 @@ on:
       github_pat:
         description: 'GITHUB PAT'
         required: true
-        default: ${{ github.token }}
+        default: '${{ github.token }}'
       username:
         description: 'Github username'
         required: true
